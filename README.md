@@ -64,3 +64,14 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # laravel8php8vue32
 # laravel8php8vue32
+
+
+1. laravel 9.
+2. php 8
+3. vue32
+
+4. Login: 
+Passport
+5. Middleware: auth
+6. webpack
+7. db migration
