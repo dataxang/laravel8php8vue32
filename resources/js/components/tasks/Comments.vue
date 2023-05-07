@@ -60,11 +60,11 @@
         mounted() {
             this.$store.dispatch('getAuthRolesAndPermissions')
             this.current_user = window.auth_user
-            window.emitter.on('resetCommentData', () => {
-                this.editMode = false
-                this.commentData.reset()
-                this.commentData.clear()
-            });
+            // window.emitter.on('resetCommentData', () => {
+            //     this.editMode = false
+            //     this.commentData.reset()
+            //     this.commentData.clear()
+            // });
         },
         computed: {
             current_roles() {

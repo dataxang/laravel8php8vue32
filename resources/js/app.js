@@ -10,6 +10,8 @@ import PermissionsCreate from './components/permissions/PermissionsCreate.vue';
 import LogoutComponent from './components/auth/LogoutComponent.vue';
 
 import Users from './components/users/Users.vue';
+import Tasks from './components/tasks/Tasks.vue';
+
   import Multiselect from '@vueform/multiselect'
   import '@vueform/multiselect/themes/default.css';
 import Form from 'vform';
@@ -37,7 +39,9 @@ const app = createApp({})
 app.component('departments', Departments);
 app.component('permissionsCreate', PermissionsCreate);
 app.component('users', Users);
+app.component('tasks', Tasks);
 app.component('multi-select', Multiselect);
+
 
 //window.url = '/task_mis/'
 window.url = '/'

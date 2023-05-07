@@ -51,7 +51,13 @@
                                
                         </ul>
                     </li>
-                    <li>
+                 
+                    <li class="{{ Request::is('tasks/index') ? 'active' : '' }}">
+                        <a href="{{route('tasksIndex')}}">Assigned Tasks</a>
+                    </li>
+                
+
+                     <li>
                         <a href="#">Tasks Inbox</a>
                     </li>
                 </ul>
@@ -143,8 +149,8 @@
        @auth
         <script>
 
-                window.token = {!! json_encode(session()->get('token')) !!}
-
+            window.token = {!! json_encode(session()->get('token')) !!}
+            window.auth_user = {!! json_encode(auth()->user()) !!};
             window.auth_roles = {!! json_encode(auth()->user()->roles) !!};
             window.auth_permissions = {!! json_encode(auth()->user()->permissions) !!};
         </script>
