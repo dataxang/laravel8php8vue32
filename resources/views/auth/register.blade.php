@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-    <div class="auth-card">
+   php artisan make:middleware ForceToJson
         <div class="row">
             <div class="col-md-12">
                 <h3 class="text-center">Register to login to the Task Tracking MIS</h3>

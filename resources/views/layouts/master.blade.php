@@ -88,7 +88,8 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Settings</a>
+                                <!--<a class="nav-link" href="#">Settings</a>-->
+                                 <a class="nav-link" href="{{route('profileIndex')}}">Settings</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
@@ -114,10 +115,22 @@
                     <p class="text-danger">
                         {{$error}}
                     </p>
+
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
                 @endforeach
             @endif
 
             @if(Session::has('success-message'))
+
+                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
                 <p class="text-success">
                     {{Session::get('success-message')}}
                 </p>

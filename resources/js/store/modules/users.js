@@ -14,26 +14,28 @@ export default {
         },
     },
     mutations: {
-        // set_users: (state, data) => {
-        //     state.users = data
-        //     state.userLinks = [];
-
-        //     for(let i = 0; i < data.links.length; i++) {
-        //         if(i === 1
-        //             || i === Number(data.links.length - 2)
-        //             || data.links[i].active
-        //             || isNaN(data.links[i].label)
-        //             || Number(data.links[i].label) === Number(data.current_page + 1)
-        //             || Number(data.links[i].label) === Number(data.current_page - 1)
-        //             ) {
-        //                 state.userLinks.push(data.links[i]);
-        //             }
-        //     }
-        // },
-
-         set_users: (state, data) => {
+        set_users: (state, data) => {
             state.users = data
+            state.userLinks = [];
+
+            for(let i = 0; i < data.links.length; i++) {
+                if(i === 1
+                    || i === Number(data.links.length - 2)
+                    || data.links[i].active
+                    || isNaN(data.links[i].label)
+                    || Number(data.links[i].label) === Number(data.current_page + 1)
+                    || Number(data.links[i].label) === Number(data.current_page - 1)
+                    ) {
+                        state.userLinks.push(data.links[i]);
+                    }
+            }
         },
+
+        //  set_users: (state, data) => {
+        //     state.users = data
+        //     state.userLinks = data.links
+        //     console.log(data);
+        // },
 
     },
     actions: {
@@ -62,10 +64,10 @@ export default {
                 context.dispatch('getUsers')
                 $('#exampleModal').modal('hide')
 
-                // window.Toast.fire({
-                //     icon: 'success',
-                //     title: 'User created successfully!'
-                // });
+                window.Toast.fire({
+                    icon: 'success',
+                    title: 'User created successfully!'
+                });
             });
         },
         updateUser: (context, userData) => {
@@ -73,10 +75,10 @@ export default {
                 context.dispatch('getUsers')
                 $('#exampleModal').modal('hide')
 
-                // window.Toast.fire({
-                //     icon: 'success',
-                //     title: 'User updated successfully!'
-                // });
+                window.Toast.fire({
+                    icon: 'success',
+                    title: 'User updated successfully!'
+                });
             });
         },
        deleteUser: (context, userData) => {

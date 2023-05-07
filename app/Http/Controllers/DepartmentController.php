@@ -19,7 +19,21 @@ class DepartmentController extends Controller
     public function getDepartments()
     {
         //   $this->middleware('auth:api');
-        return response()->json(Department::latest()->get());
+        // return response()->json(Department::latest()->get());
+        return response()->json(Department::latest()->paginate(1));
+    }
+    
+
+        public function searchDepartment()
+    {
+        if($search = \Request::get('name')) {
+            $departments = Department::where(function($query) use ($search) {
+                $query->where('name', 'LIKE', "%$search%");
+            })->latest()->paginate(10);
+        }else{
+            $departments = Department::latest()->paginate(10);
+        }
+        return response()->json($departments);
     }
     
     public function storeDepartment(Request $request)

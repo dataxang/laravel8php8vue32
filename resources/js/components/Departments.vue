@@ -7,6 +7,24 @@
                     <button class="btn btn-success float-end" @click="createDepartment">New Department</button>
                 </div>
                 <div class="card-body">
+
+                     <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="search_type">Search Type</label>
+                                <select name="search_type" class="form-control" v-model="searchData.search_type">
+                                    <option value="name">Name</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="search_value">Search Value</label>
+                                <input type="text" class="form-control" name="search_value" v-model="searchData.search_value" @keyup="searchDepartment">
+                            </div>
+                        </div>
+                    </div>
+
                     <button @click="testAction" class="btn btn-info">Test</button>
                     {{test}}
                     <div class="table-responsive">
@@ -20,7 +38,7 @@
                                 </tr>
                             </thead>
                            <tbody>
-                                <tr v-for="(department, index) in departments" :key="index">
+                                <tr v-for="(department, index) in departments.data" :key="index">
                                     <td>{{index + 1}}</td>
                                     <td>{{department.name}}</td>
                                     <td v-if="current_permissions.has('departments-update') || current_permissions.has('departments-delete')">
@@ -34,6 +52,14 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+
+                      <div class="d-flex justify-content-center" v-if="departmentLinks.length > 3">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li :class="`page-item ${link.active ? 'active' : ''} ${!link.url ? 'disabled' : ''}`" v-for="(link, index) in departmentLinks" :key="index"><a class="page-link" href="#" v-html="link.label" @click.prevent="getResults(link)"></a></li>
+                            </ul>
+                        </nav>
                     </div>
 
 
@@ -101,6 +127,10 @@
                 departmentErrors: {
                     name: false,
                   
+                },    
+                searchData: {
+                    search_type: 'name',
+                    search_value: '',
                 },
             }
         },
@@ -111,6 +141,19 @@
             //         this.departments = response.data
             //     });
             // },
+
+            searchDepartment() {
+                this.$store.dispatch('searchDepartment', this.searchData)
+            },
+
+            getResults(link) {
+                if(!link.url || link.active) {
+                    return;
+                }else{
+                    this.$store.dispatch('getDepartmentsResults', link);
+                }
+            },
+
             createDepartment() {
                 this.editMode = false
                 this.departmentData.name =  ''
@@ -149,15 +192,33 @@
                     this.$store.dispatch('updateDepartment',this.departmentData);
                 // }
             },
-            deleteDepartment(department) {
-                // if(confirm('Are you sure you wanna delete department!')) {
-                //     axios.post(window.url + 'api/deleteDepartment/' + department.id).then(() => {
-                //         this.getDepartments()
-                //     });
-                // }
+            // deleteDepartment(department) {
+            //     // if(confirm('Are you sure you wanna delete department!')) {
+            //     //     axios.post(window.url + 'api/deleteDepartment/' + department.id).then(() => {
+            //     //         this.getDepartments()
+            //     //     });
+            //     // }
 
-                  this.$store.dispatch('deleteDepartment',department);
+            //       this.$store.dispatch('deleteDepartment',department);
+            // },
+
+             deleteDepartment(department) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.$store.dispatch('deleteDepartment', department)
+                        }
+                })
+
             },
+            
             testAction( ){
                 this.$store.dispatch('testAction');
             }
@@ -175,6 +236,9 @@
                 // test()  {
                 //     return this.$store.getters.test
                 // }
+                 departmentLinks() {
+                return this.$store.getters.departmentLinks
+            },
 
                 departments() {
                     return this.$store.getters.departments;

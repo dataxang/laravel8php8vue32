@@ -8,6 +8,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,18 +53,28 @@ Route::middleware(['auth'])->group(function() {
         Route::get('roles/edit/{id}', 'edit')->name('rolesEdit')->middleware('permission:roles-update');
         Route::post('roles/update/{id}', 'update')->name('rolesUpdate')->middleware('permission:roles-update');
         Route::post('roles/delete/{id}', 'delete')->name('rolesDelete')->middleware('permission:roles-delete');
+        Route::post('roles/search', 'search')->name('rolesSearch')->middleware('permission:roles-read');
     });
     
-    Route::controller(PermissionController::class)->group(function() {
+    Route::controller(PermissionController::class)->group(function() {        
         Route::get('permissions/index', 'index')->name('permissionsIndex')->middleware('permission:permissions-read');
         Route::get('permissions/create', 'create')->name('permissionsCreate')->middleware('permission:permissions-create');
         Route::post('permissions/store', 'store')->name('permissionsStore')->middleware('permission:permissions-create');
         Route::get('permissions/edit/{id}', 'edit')->name('permissionsEdit')->middleware('permission:permissions-update');
         Route::post('permissions/update/{id}', 'update')->name('permissionsUpdate')->middleware('permission:permissions-update');
         Route::post('permissions/delete/{id}', 'delete')->name('permissionsDelete')->middleware('permission:permissions-delete');
+
+        Route::post('permissions/search', 'search')->name('permissionsSearch')->middleware('permission:permissions-read');
+
     });
 
     Route::get('users/index', [UserController::class, 'index'])->name('usersIndex')->middleware('permission:users-read');
 
+
+ Route::controller(ProfileController::class)->group(function() {
+        Route::get('profile/index', 'index')->name('profileIndex')->middleware('permission:profile-read');
+        Route::post('profile/update/{id}', 'update')->name('profileUpdate')->middleware('permission:profile-update');
+        Route::post('profile/password/update/{id}', 'passwordUpdate')->name('profilePasswordUpdate')->middleware('permission:profile-password-update');
+    });
 
 });

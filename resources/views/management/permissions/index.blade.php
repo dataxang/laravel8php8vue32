@@ -8,11 +8,11 @@
                     <h5 class="text-light">Permissions</h5>
                 </div>
                 <div class="col-md-6">
-                    @can('permissions-create')
+                  
                         <a href="{{ route('permissionsCreate') }}" class="btn btn-success float-right">
                             Create New Permission
                         </a>
-                    @endcan
+                 
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
             <div class="row my-2">
                 <div class="col-md-12">
                     <!--<form action="#" method="POST">-->
-                    <form action="#" method="POST">
+                     <form action="{{route('permissionsSearch')}}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-3">

@@ -20,17 +20,18 @@ export default {
 
             state.departmentLinks = [];
 
-            // for(let i = 0; i < data.links.length; i++) {
-            //     if(i === 1
-            //         || i === Number(data.links.length - 2)
-            //         || data.links[i].active
-            //         || isNaN(data.links[i].label)
-            //         || Number(data.links[i].label) === Number(data.current_page + 1)
-            //         || Number(data.links[i].label) === Number(data.current_page - 1)
-            //         ) {
-            //             state.departmentLinks.push(data.links[i]);
-            //         }
-            // }
+            for(let i = 0; i < data.links.length; i++) {
+                if(i === 1
+                    || i === Number(data.links.length - 2)
+                    || data.links[i].active
+                    || isNaN(data.links[i].label)
+                    || Number(data.links[i].label) === Number(data.current_page + 1)
+                    || Number(data.links[i].label) === Number(data.current_page - 1)
+                    ) {
+                        state.departmentLinks.push(data.links[i]);
+                    }
+            }
+            
         }
     },
     actions: {
@@ -75,17 +76,28 @@ export default {
                 });
             });
         },
-        deleteDepartment: (context, departmentData) => {
-            if(confirm('are you sure to delete this department!')) {
-               axios.post(window.url + 'api/deleteDepartment/' + departmentData.id).then(() => {
-                    context.dispatch('getDepartments')
-                    // window.Toast.fire({
-                    //     icon: 'success',
-                    //     title: 'Department deleted successfully!'
-                    // });
-                });
-            }
+        // deleteDepartment: (context, departmentData) => {
+        //     if(confirm('are you sure to delete this department!')) {
+        //        axios.post(window.url + 'api/deleteDepartment/' + departmentData.id).then(() => {
+        //             context.dispatch('getDepartments')
+        //             // window.Toast.fire({
+        //             //     icon: 'success',
+        //             //     title: 'Department deleted successfully!'
+        //             // });
+        //         });
+        //     }
             
+        // }
+
+        deleteDepartment: (context, departmentData) => {
+            axios.post(window.url + 'api/deleteDepartment/' + departmentData.id).then(() => {
+                context.dispatch('getDepartments')
+                window.Toast.fire({
+                    icon: 'success',
+                    title: 'Department deleted successfully!'
+                });
+            });
         }
+        
     },
 }

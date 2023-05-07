@@ -37,7 +37,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(user, index) in users" :key="index">
+                                <tr v-for="(user, index) in users.data" :key="index">
                                     <td>{{index + 1}}</td>
                                     <td>{{user.name}}</td>
                                     <td>{{user.email}}</td>
@@ -54,6 +54,18 @@
                             </tbody>
                         </table>
                     </div>
+
+
+                    <!--<nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>-->
+
 
                     <div class="d-flex justify-content-center" v-if="userLinks.length > 3">
                         <nav aria-label="Page navigation example">
@@ -235,31 +247,31 @@
                 this.$store.dispatch('updateUser', this.userData)
             },
 
-            deleteUser(user) {
-                this.$store.dispatch('deleteUser', user)
+            // deleteUser(user) {
+            //     this.$store.dispatch('deleteUser', user)
             
 
-            //   deleteUser: (context, userData) => {
+              deleteUser: (context, userData) => {
 
-            //      if(confirm('Are you sure you wanna delete the user!')) {
-            //     axios.post(window.url + 'api/deleteUser/' + userData.id).then(() => {
-            //         context.dispatch('getUsers')
-            //     });
-            // }
+                 if(confirm('Are you sure you wanna delete the user!')) {
+                axios.post(window.url + 'api/deleteUser/' + userData.id).then(() => {
+                    context.dispatch('getUsers')
+                });
+            }
 
-                // Swal.fire({
-                //     title: 'Are you sure?',
-                //     text: "You won't be able to revert this!",
-                //     icon: 'warning',
-                //     showCancelButton: true,
-                //     confirmButtonColor: '#3085d6',
-                //     cancelButtonColor: '#d33',
-                //     confirmButtonText: 'Yes, delete it!'
-                //     }).then((result) => {
-                //         if (result.isConfirmed) {
-                //             this.$store.dispatch('deleteUser', user)
-                //         }
-                // });
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.$store.dispatch('deleteUser', user)
+                        }
+                });
             },
         },
         mounted() {
