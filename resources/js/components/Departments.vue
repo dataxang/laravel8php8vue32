@@ -23,10 +23,7 @@
                                 <input type="text" class="form-control" name="search_value" v-model="searchData.search_value" @keyup="searchDepartment">
                             </div>
                         </div>
-                    </div>
-
-                    <button @click="testAction" class="btn btn-info">Test</button>
-                    {{test}}
+                    </div>                    
                     <div class="table-responsive">
                         <table class="table table-hover text-center">
                             <thead>

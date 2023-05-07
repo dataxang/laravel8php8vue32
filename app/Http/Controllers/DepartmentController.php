@@ -24,6 +24,8 @@ class DepartmentController extends Controller
     }
     
 
+ 
+
         public function searchDepartment()
     {
         if($search = \Request::get('name')) {
@@ -35,7 +37,7 @@ class DepartmentController extends Controller
         }
         return response()->json($departments);
     }
-    
+
     public function storeDepartment(Request $request)
     {
         $request->validate([
