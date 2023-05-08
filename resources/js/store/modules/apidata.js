@@ -90,29 +90,43 @@ export default {
             // })
 
             window.auth_roles.map(role => {
-                if(role.name === 'director') {
-                    data.forEach(user => {
-                        if(user.department_id === window.auth_user.department_id && user.id !== window.auth_user.id) {
-                            state.filtered_users.push({
-                                value: user.id,
-                                label: user.name
-                            });
-                        }
-                    });
-                }
 
-                if(role.name === 'manager') {
-                    data.forEach(user => {
-                        user.roles.map(role => {
-                            if(user.department_id === window.auth_user.department_id && user.id !== window.auth_user.id && role.name !== 'director') {
-                                state.filtered_users.push({
-                                    value: user.id,
-                                    label: user.name
-                                });
-                            }
-                        })
+                  if(
+                    user.department_id === window.auth_user.department_id 
+                    && user.id !== window.auth_user.id
+                    && user.user_level !== 0
+                    && user.user_level > window.auth_user.user_level
+                ) {
+                    state.filtered_users.push({
+                        value: user.id,
+                        label: user.name
                     });
                 }
+          
+
+                // if(role.name === 'director') {
+                //     data.forEach(user => {
+                //         if(user.department_id === window.auth_user.department_id && user.id !== window.auth_user.id) {
+                //             state.filtered_users.push({
+                //                 value: user.id,
+                //                 label: user.name
+                //             });
+                //         }
+                //     });
+                // }
+
+                // if(role.name === 'manager') {
+                //     data.forEach(user => {
+                //         user.roles.map(role => {
+                //             if(user.department_id === window.auth_user.department_id && user.id !== window.auth_user.id && role.name !== 'director') {
+                //                 state.filtered_users.push({
+                //                     value: user.id,
+                //                     label: user.name
+                //                 });
+                //             }
+                //         })
+                //     });
+                // }
             })
         },
     },

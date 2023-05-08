@@ -59,8 +59,8 @@ class TaskController extends Controller
         $user_id = auth('api')->user()->id;
 
         $tasks = !$user_role 
-            ? Task::where('user_id', $user_id)->where('parent_id', '0')->with('users')->with('department')->with('performed_by_user')->latest()->paginate(10)
-            : Task::where('parent_id', '0')->with('users')->with('department')->with('performed_by_user')->latest()->paginate(10);
+            ? Task::where('user_id', $user_id)->where('parent_id', '0')->with('users')->with('department')->with('performed_by_user')->latest()->paginate(2)
+            : Task::where('parent_id', '0')->with('users')->with('department')->with('performed_by_user')->latest()->paginate(2);
         return response()->json($tasks);
     }
 
@@ -132,13 +132,13 @@ class TaskController extends Controller
 
         $message = 'Task Updated';
 
-        foreach($request->assign_to as $user_id) {
-            $userToNotify = User::findOrFail($user_id);
-            $userToNotify->notify(new TaskNotification(auth('api')->user(), $task, $message));
-            // Notification::send($userToNotify, new TaskEmailNotification(auth('api')->user(), $task, $message));
-        }
+        // foreach($request->assign_to as $user_id) {
+        //     $userToNotify = User::findOrFail($user_id);
+        //     $userToNotify->notify(new TaskNotification(auth('api')->user(), $task, $message));
+        //     // Notification::send($userToNotify, new TaskEmailNotification(auth('api')->user(), $task, $message));
+        // }
 
-        broadcast(new NotificationEvent())->toOthers();
+        // broadcast(new NotificationEvent())->toOthers();
 
         return response()->json('success');
     }
