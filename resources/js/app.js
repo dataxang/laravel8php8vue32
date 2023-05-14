@@ -11,6 +11,7 @@ import LogoutComponent from './components/auth/LogoutComponent.vue';
 
 import Users from './components/users/Users.vue';
 import Tasks from './components/tasks/Tasks.vue';
+import Inbox from './components/tasks/Inbox.vue';
 
   import Multiselect from '@vueform/multiselect'
   import '@vueform/multiselect/themes/default.css';
@@ -36,11 +37,13 @@ window.Toast = Toast;
 
 const app = createApp({})
 
+app.component('multi-select', Multiselect);
+app.component('logout-component', LogoutComponent);
 app.component('departments', Departments);
 app.component('permissionsCreate', PermissionsCreate);
 app.component('users', Users);
 app.component('tasks', Tasks);
-app.component('multi-select', Multiselect);
+app.component('inbox', Inbox);
 
 
 //window.url = '/task_mis/'

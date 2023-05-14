@@ -51,4 +51,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\Department');
     }
+    public function tasks()
+    {
+        return $this->belongsToMany('App\Models\Task')->with('users')->with('performed_by_user')->with('sub_tasks');
+    }
 }

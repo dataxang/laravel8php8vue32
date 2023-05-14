@@ -284,7 +284,7 @@
         }, 
         computed: {
             users() {
-                console.log(this.$store.getters.users);
+                // console.log(this.$store.getters.users);
                 return this.$store.getters.users
             },
             userLinks() {

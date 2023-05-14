@@ -63,7 +63,7 @@ export default {
         },
         set_filtered_permissions: (state, data) => {
             state.filtered_permissions = [];
-            console.log(data.values)
+            // console.log(data.values)
             data.values.forEach(value => {
                 state.all_permissions.find(element => {
                     if(element.name.includes(value)) {
@@ -75,23 +75,8 @@ export default {
         set_all_users: (state, data) => {
             state.filtered_users = [];
 
-            // data.forEach(user => {
-            //     if(
-            //         user.department_id === window.auth_user.department_id 
-            //         && user.id !== window.auth_user.id
-            //         && user.user_level !== 0
-            //         && user.user_level > window.auth_user.user_level
-            //     ) {
-            //         state.filtered_users.push({
-            //             value: user.id,
-            //             label: user.name
-            //         });
-            //     }
-            // })
-
-            window.auth_roles.map(role => {
-
-                  if(
+            data.forEach(user => {
+                if(
                     user.department_id === window.auth_user.department_id 
                     && user.id !== window.auth_user.id
                     && user.user_level !== 0
@@ -102,6 +87,21 @@ export default {
                         label: user.name
                     });
                 }
+            })
+
+            // window.auth_roles.map(role => {
+
+            //       if(
+            //         user.department_id === window.auth_user.department_id 
+            //         && user.id !== window.auth_user.id
+            //         && user.user_level !== 0
+            //         && user.user_level > window.auth_user.user_level
+            //     ) {
+            //         state.filtered_users.push({
+            //             value: user.id,
+            //             label: user.name
+            //         });
+            //     }
           
 
                 // if(role.name === 'director') {
@@ -127,7 +127,7 @@ export default {
                 //         })
                 //     });
                 // }
-            })
+            // })
         },
     },
     actions: {

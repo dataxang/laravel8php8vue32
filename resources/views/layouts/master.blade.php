@@ -58,7 +58,7 @@
                 
 
                      <li>
-                        <a href="#">Tasks Inbox</a>
+                        <a href="{{route('tasksInbox')}}">Tasks Inbox</a>
                     </li>
                 </ul>
 
