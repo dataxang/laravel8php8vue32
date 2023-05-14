@@ -478,7 +478,7 @@
                 $('#exampleModal').modal('show')
             },
             getPerformTaskFile(event) {
-                // console.log(event.target.files[0]);
+                console.log(event.target.files[0]);
                 this.performTaskData.file = event.target.files[0]
             },
             storePerformTask() {

@@ -215,10 +215,10 @@ class TaskController extends Controller
         ]);
 
         $userToNotify = User::findOrFail($task->user_id);
-        $userToNotify->notify(new TaskNotification(auth('api')->user(), $task, $message));
+        // $userToNotify->notify(new TaskNotification(auth('api')->user(), $task, $message));
         // Notification::send($userToNotify, new TaskEmailNotification(auth('api')->user(), $task, $message));
 
-        broadcast(new NotificationEvent())->toOthers();
+        // broadcast(new NotificationEvent())->toOthers();
 
         return response()->json('success');
     }
