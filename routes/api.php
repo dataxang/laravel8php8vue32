@@ -2,9 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ApiController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\TaskController;
@@ -36,6 +36,10 @@ Route::middleware(['forcetojson', 'auth:api'])->group(function() {
     });
 
     Route::controller(ApiController::class)->group(function() {
+        Route::get('getUnreadNotifications', 'getUnreadNotifications');
+        Route::get('getAllNotifications', 'getAllNotifications');
+        Route::get('markNotificationAsRead', 'markNotificationAsRead');
+        Route::get('clearAllNotifications', 'clearAllNotifications');
         Route::get('getAllDepartments', 'getAllDepartments')->middleware('permission:departments-read');
         Route::get('getAllRoles', 'getAllRoles')->middleware('permission:roles-read');
         Route::get('getAllPermissions', 'getAllPermissions')->middleware('permission:permissions-read');

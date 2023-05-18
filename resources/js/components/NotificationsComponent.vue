@@ -80,9 +80,9 @@
         },
         methods: {
             listenToNotifications(task) {
-                Echo.channel(`notification`).listen('NotificationEvent', () => {
-                    this.$store.dispatch('getUnreadNotifications')
-                });
+                // Echo.channel(`notification`).listen('NotificationEvent', () => {
+                //     this.$store.dispatch('getUnreadNotifications')
+                // });
             },
             clearAllNotifications() {
                 Swal.fire({

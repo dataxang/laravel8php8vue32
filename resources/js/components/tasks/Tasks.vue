@@ -236,11 +236,11 @@
             }
         },
         methods: {
-            listenToComments(task) {
-                Echo.channel(`task.${task.id}`).listen('CommentEvent', () => {
-                    this.$store.dispatch('getComments', {taskData: task})
-                });
-            },
+            // listenToComments(task) {
+            //     Echo.channel(`task.${task.id}`).listen('CommentEvent', () => {
+            //         this.$store.dispatch('getComments', {taskData: task})
+            //     });
+            // },
             searchTask() {
                 this.$store.dispatch('searchTask', this.searchData)
             },
@@ -255,7 +255,7 @@
                 this.taskInfo = task
                 window.emitter.emit('resetCommentData')
                 this.$store.dispatch('getComments', {taskData: task})
-                this.listenToComments(task)
+                // this.listenToComments(task)
                 $('#commentsModal').modal('show')
             },
             showTask(task) {
