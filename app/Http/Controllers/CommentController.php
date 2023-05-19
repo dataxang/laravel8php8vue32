@@ -86,8 +86,8 @@ class CommentController extends Controller
         foreach($users_array as $user_id) {
             if(auth('api')->user()->id != $user_id) {
                 $userToNotify = User::findOrFail($user_id);
-                // $userToNotify->notify(new TaskNotification(auth('api')->user(), $task, $message));
-                // Notification::send($userToNotify, new TaskEmailNotification(auth('api')->user(), $task, $message));
+                $userToNotify->notify(new TaskNotification(auth('api')->user(), $task, $message));
+                Notification::send($userToNotify, new TaskEmailNotification(auth('api')->user(), $task, $message));
             }
         }
 
