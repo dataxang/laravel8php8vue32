@@ -55,7 +55,7 @@ class CommentController extends Controller
         }
 
         broadcast(new CommentEvent($task))->toOthers();
-        // broadcast(new NotificationEvent())->toOthers();
+        broadcast(new NotificationEvent())->toOthers();
 
         return response()->json('success');
     }
@@ -92,7 +92,7 @@ class CommentController extends Controller
         }
 
         broadcast(new CommentEvent($task))->toOthers();
-        // broadcast(new NotificationEvent())->toOthers();
+        broadcast(new NotificationEvent())->toOthers();
 
         return response()->json('success');
     }

@@ -102,7 +102,7 @@ class TaskController extends Controller
             Notification::send($userToNotify, new TaskEmailNotification(auth('api')->user(), $task, $message));
         }
 
-        // broadcast(new NotificationEvent())->toOthers();
+        broadcast(new NotificationEvent())->toOthers();
 
         return response()->json('success');
     }
@@ -138,7 +138,7 @@ class TaskController extends Controller
             Notification::send($userToNotify, new TaskEmailNotification(auth('api')->user(), $task, $message));
         }
 
-        // broadcast(new NotificationEvent())->toOthers();
+        broadcast(new NotificationEvent())->toOthers();
 
         return response()->json('success');
     }
@@ -218,7 +218,7 @@ class TaskController extends Controller
         $userToNotify->notify(new TaskNotification(auth('api')->user(), $task, $message));
         Notification::send($userToNotify, new TaskEmailNotification(auth('api')->user(), $task, $message));
 
-        // broadcast(new NotificationEvent())->toOthers();
+        broadcast(new NotificationEvent())->toOthers();
 
         return response()->json('success');
     }
