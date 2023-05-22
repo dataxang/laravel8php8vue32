@@ -99,7 +99,7 @@ class TaskController extends Controller
         foreach($request->assign_to as $user_id) {
             $userToNotify = User::findOrFail($user_id);
             $userToNotify->notify(new TaskNotification(auth('api')->user(), $task, $message));
-            Notification::send($userToNotify, new TaskEmailNotification(auth('api')->user(), $task, $message));
+            // Notification::send($userToNotify, new TaskEmailNotification(auth('api')->user(), $task, $message));
         }
 
         broadcast(new NotificationEvent())->toOthers();
@@ -135,7 +135,7 @@ class TaskController extends Controller
         foreach($request->assign_to as $user_id) {
             $userToNotify = User::findOrFail($user_id);
             $userToNotify->notify(new TaskNotification(auth('api')->user(), $task, $message));
-            Notification::send($userToNotify, new TaskEmailNotification(auth('api')->user(), $task, $message));
+            // Notification::send($userToNotify, new TaskEmailNotification(auth('api')->user(), $task, $message));
         }
 
         broadcast(new NotificationEvent())->toOthers();
