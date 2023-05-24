@@ -35,7 +35,7 @@
     export default {
         data() {
             return {
-                year: '2022',
+                year: '2023',
                 myChart: null,
             }
         },
